@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>内置服务</title>
+    <script src="plugins/angularjs/angular.min.js"></script>
+    <script>
+        var app=angular.module("myapp",[]);
+        app.controller("mystr",function ($scope,$http) {
+            $scope.findAll=function () {
+                $http.get("./brand/findAll.do").success(
+                    function (responce) {
+                       $scope.list=responce;
+                    }
+                )
+            }
+        })
+    </script>
+</head>
+<body ng-app="myapp" ng-controller="mystr" ng-init="findAll()">
+
+    <div ng-repeat="i in list">
+        <span>id:{{i.id}}</span>====
+        <span>name:{{i.name}}</span>====
+        <span>firstChar:{{i.firstChar}}</span><br>
+    </div>
+</body>
+</html>
